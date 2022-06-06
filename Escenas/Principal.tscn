@@ -1,14 +1,38 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Escenarios/7.png" type="Texture" id=1]
+[ext_resource path="res://Escenas/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Audio/Background/Jedi Temple March.mp3" type="AudioStream" id=3]
+[ext_resource path="res://Escenarios/15.png" type="Texture" id=4]
+[ext_resource path="res://Escenas/Camera.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=6]
+[ext_resource path="res://Escenarios/12.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 436.5, 23.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 19.5, 51 )
 
 [node name="Principal" type="Node2D"]
 
+[node name="Musica" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+
 [node name="Background" type="ParallaxBackground" parent="."]
+
+[node name="12" type="Sprite" parent="Background"]
+position = Vector2( 1458, 187 )
+texture = ExtResource( 7 )
 
 [node name="Edificios" type="ParallaxLayer" parent="Background"]
 motion_mirroring = Vector2( 384, 0 )
+
+[node name="7" type="Sprite" parent="Background/Edificios"]
+position = Vector2( 961, 72.5 )
+scale = Vector2( 1.93, 1.14844 )
+texture = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Background/Edificios"]
 position = Vector2( -2.00005, -1 )
@@ -16,9 +40,25 @@ scale = Vector2( 1.93, 1.21875 )
 texture = ExtResource( 1 )
 centered = false
 
-[node name="Musica" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = -18.0
+[node name="Colisiones" type="StaticBody2D" parent="."]
 
-[node name="TileMap" type="TileMap" parent="."]
-format = 1
+[node name="Principal" type="Sprite" parent="Colisiones"]
+position = Vector2( 2242.75, 106 )
+scale = Vector2( 1.00056, 1.12953 )
+texture = ExtResource( 4 )
+
+[node name="suelo" type="CollisionShape2D" parent="Colisiones"]
+position = Vector2( 436.5, 190.5 )
+shape = SubResource( 1 )
+
+[node name="puerta" type="CollisionShape2D" parent="Colisiones"]
+position = Vector2( 160, 115 )
+shape = SubResource( 2 )
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource( 2 )]
+position = Vector2( 193, 135 )
+script = ExtResource( 6 )
+
+[node name="Camera" parent="." instance=ExtResource( 5 )]
+position = Vector2( 192, 108 )
+current = true
