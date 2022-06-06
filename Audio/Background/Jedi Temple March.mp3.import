@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Jedi Temple March.mp3-3e57febc7a4506695abc011f1340cb5f.mp3str"
+
+[deps]
+
+source_file="res://Audio/Background/Jedi Temple March.mp3"
+dest_files=[ "res://.import/Jedi Temple March.mp3-3e57febc7a4506695abc011f1340cb5f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
