@@ -3,10 +3,11 @@ extends KinematicBody2D
 const SPEED = 100
 const FLOOR = Vector2(0,-1)
 const GRAVITY = 12
-const JUMP_HEIGHT = 500
+const JUMP_HEIGHT = 600
 const CAST_ENEMY = 22
 const CAST_WALL = 10
 onready var motion : Vector2 = Vector2.ZERO
+onready var enemy = get_tree().get_nodes_in_group("Enemy")[0]
 var can_move : bool
 
 
@@ -15,7 +16,7 @@ var playback: AnimationNodeStateMachinePlayback #enlace con el animation tree
 func _ready():
 	playback = $AnimationTree.get("parameters/playback")
 	playback.start("Estatico")#estado inicial del arbol
-	$AnimationTree.active = true #para activar el arbol 
+	$AnimationTree.active = true #para activar el arbol
 
 func _process(delta):
 	motion_ctrl()
@@ -64,6 +65,7 @@ func salto_ctrl():
 			$RayWall.enabled = false
 		
 			if Input.is_action_just_pressed("Salto"):
+				$Sonidos/Jump.play()
 				motion.y -= JUMP_HEIGHT
 		
 		false:
@@ -87,20 +89,31 @@ func ataque_ctrl():
 			match playback.get_current_node():
 				"Estatico":
 					playback.travel("Ataque1")
-				
+					$Sonidos/Ataque1.play()
 				"Ataque1":
 					playback.travel("Ataque2")
-					
+					$Sonidos/Ataque2.play()
 				"Ataque2":
 					playback.travel("Ataque3")
-				
+					$Sonidos/Ataque3.play()
 		if get_axis().x == 0 and Input.is_action_just_pressed("Combo"):
 			match playback.get_current_node():
 				"Estatico":
 					playback.travel("Combo1")
-				
+					$Sonidos/Ataque1.play()
 				"Combo1":
 					playback.travel("Combo2")
-					
+					$Sonidos/Ataque2.play()
 				"Combo2":
 					playback.travel("Combo3")
+					$Sonidos/Ataque3.play()
+		
+	if playback.get_current_node() == "Ataque1" or playback.get_current_node() == "Ataque2" or playback.get_current_node() == "Ataque3" or playback.get_current_node() == "Combo1" or playback.get_current_node() == "Combo2" or playback.get_current_node() == "Combo3":
+		$RayEnemy.enabled = true
+	else:
+		$RayEnemy.enabled = false
+	
+	var col = $RayEnemy.get_collider() 
+	if $RayEnemy.is_colliding() and col.is_in_group("Enemy"):
+		col.queue_free()
+

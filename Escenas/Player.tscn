@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=2]
+[gd_scene load_steps=132 format=2]
 
 [ext_resource path="res://Obi Wan/Salto/14.png" type="Texture" id=1]
 [ext_resource path="res://Obi Wan/Caminar/2.png" type="Texture" id=2]
@@ -88,10 +88,11 @@
 [ext_resource path="res://Obi Wan/Estatico/3.png" type="Texture" id=86]
 [ext_resource path="res://Obi Wan/Estatico/4.png" type="Texture" id=87]
 [ext_resource path="res://Obi Wan/Combo1/Ataque2/9.png" type="Texture" id=88]
-
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 17.0
-height = 46.0
+[ext_resource path="res://Audio/31.mp3" type="AudioStream" id=89]
+[ext_resource path="res://Audio/Jump1.mp3" type="AudioStream" id=90]
+[ext_resource path="res://Audio/1.mp3" type="AudioStream" id=91]
+[ext_resource path="res://Audio/2.mp3" type="AudioStream" id=92]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=93]
 
 [sub_resource type="Animation" id=6]
 resource_name = "Ataque1"
@@ -112,6 +113,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=7]
 resource_name = "Ataque2"
 length = 0.9
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -208,7 +210,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=12]
 resource_name = "Estatico"
-length = 0.4
+length = 1.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -217,10 +219,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 84 ), ExtResource( 85 ), ExtResource( 85 ), ExtResource( 86 ), ExtResource( 87 ) ]
+"values": [ ExtResource( 84 ), ExtResource( 85 ), ExtResource( 86 ), ExtResource( 87 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -340,14 +342,15 @@ states/Estatico/position = Vector2( 546, 263 )
 states/Salto/node = SubResource( 23 )
 states/Salto/position = Vector2( 284, 263 )
 transitions = [ "Estatico", "Salto", SubResource( 24 ), "Estatico", "Caminar", SubResource( 25 ), "Caminar", "Estatico", SubResource( 26 ), "Combo1", "Combo2", SubResource( 28 ), "Combo2", "Combo3", SubResource( 29 ), "Estatico", "Combo1", SubResource( 30 ), "Combo1", "Estatico", SubResource( 31 ), "Combo2", "Estatico", SubResource( 32 ), "Combo3", "Estatico", SubResource( 33 ), "Ataque1", "Ataque2", SubResource( 34 ), "Ataque2", "Ataque3", SubResource( 35 ), "Estatico", "Ataque1", SubResource( 36 ), "Ataque1", "Estatico", SubResource( 37 ), "Ataque2", "Estatico", SubResource( 38 ), "Ataque3", "Estatico", SubResource( 39 ), "Salto", "Estatico", SubResource( 40 ) ]
-graph_offset = Vector2( 0, 155.948 )
+graph_offset = Vector2( 0, 140.351 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=14]
 
-[node name="Player" type="KinematicBody2D"]
+[sub_resource type="RectangleShape2D" id=41]
+extents = Vector2( 16, 31.5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+[node name="Player" type="KinematicBody2D" groups=["Player"]]
+script = ExtResource( 93 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -367,12 +370,31 @@ anims/Salto = SubResource( 5 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 13 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 14 )
 
-[node name="RayEnemy" type="RayCast2D" parent="."]
-position = Vector2( 0, 5 )
-cast_to = Vector2( 22, 0 )
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 1, -0.5 )
+shape = SubResource( 41 )
+
+[node name="Sonidos" type="Node" parent="."]
+
+[node name="Ataque1" type="AudioStreamPlayer2D" parent="Sonidos"]
+stream = ExtResource( 91 )
+
+[node name="Ataque2" type="AudioStreamPlayer2D" parent="Sonidos"]
+stream = ExtResource( 92 )
+
+[node name="Ataque3" type="AudioStreamPlayer2D" parent="Sonidos"]
+stream = ExtResource( 89 )
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Sonidos"]
+stream = ExtResource( 90 )
 
 [node name="RayWall" type="RayCast2D" parent="."]
+position = Vector2( 0, 5 )
+cast_to = Vector2( 30, 0 )
+
+[node name="RayEnemy" type="RayCast2D" parent="."]
 position = Vector2( 0, -2 )
 cast_to = Vector2( 20, 0 )

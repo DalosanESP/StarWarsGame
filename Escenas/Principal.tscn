@@ -5,14 +5,14 @@
 [ext_resource path="res://Audio/Background/Jedi Temple March.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Escenarios/15.png" type="Texture" id=4]
 [ext_resource path="res://Escenas/Camera.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scripts/Player.gd" type="Script" id=6]
 [ext_resource path="res://Escenarios/12.png" type="Texture" id=7]
+[ext_resource path="res://Escenas/Enemy.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 436.5, 23.5 )
+extents = Vector2( 460, 23.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 19.5, 51 )
+extents = Vector2( 19.5, 83.5 )
 
 [node name="Principal" type="Node2D"]
 
@@ -48,16 +48,18 @@ scale = Vector2( 1.00056, 1.12953 )
 texture = ExtResource( 4 )
 
 [node name="suelo" type="CollisionShape2D" parent="Colisiones"]
-position = Vector2( 436.5, 190.5 )
+position = Vector2( 460, 190.5 )
 shape = SubResource( 1 )
 
 [node name="puerta" type="CollisionShape2D" parent="Colisiones"]
-position = Vector2( 160, 115 )
+position = Vector2( 160, 82.5 )
 shape = SubResource( 2 )
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource( 2 )]
-position = Vector2( 193, 135 )
-script = ExtResource( 6 )
+[node name="Enemy-01" parent="." instance=ExtResource( 8 )]
+position = Vector2( -36, 15 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 200, 132 )
 
 [node name="Camera" parent="." instance=ExtResource( 5 )]
 position = Vector2( 192, 108 )
