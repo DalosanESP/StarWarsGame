@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Escenarios/Nave/1.png" type="Texture" id=1]
 [ext_resource path="res://Escenas/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Escenarios/Nave/0.png" type="Texture" id=4]
 [ext_resource path="res://Escenas/Camera.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Escenas/Disparo.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Juego.gd" type="Script" id=7]
 [ext_resource path="res://Escenas/Enemy.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -15,6 +16,7 @@ extents = Vector2( 563.5, 1 )
 extents = Vector2( 4.25, 83.5 )
 
 [node name="Principal" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="Musica" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
@@ -32,7 +34,7 @@ texture = ExtResource( 4 )
 [node name="Colisiones" type="StaticBody2D" parent="."]
 
 [node name="Principal" type="Sprite" parent="Colisiones"]
-position = Vector2( 283, 100 )
+position = Vector2( 284, 100 )
 scale = Vector2( 0.999759, 1.25134 )
 texture = ExtResource( 1 )
 
@@ -40,15 +42,19 @@ texture = ExtResource( 1 )
 position = Vector2( 356.5, 168 )
 shape = SubResource( 1 )
 
-[node name="puerta" type="CollisionShape2D" parent="Colisiones"]
+[node name="limite1" type="CollisionShape2D" parent="Colisiones"]
 position = Vector2( -14, 91 )
+shape = SubResource( 2 )
+
+[node name="limite2" type="CollisionShape2D" parent="Colisiones"]
+position = Vector2( 592, 115 )
 shape = SubResource( 2 )
 
 [node name="Enemy-01" parent="." instance=ExtResource( 8 )]
 position = Vector2( 338, 140 )
 
-[node name="Disparo" parent="Enemy-01" instance=ExtResource( 6 )]
-position = Vector2( -24, -6 )
+[node name="Disparo" parent="." instance=ExtResource( 6 )]
+position = Vector2( 330, 133 )
 
 [node name="Obi" parent="." instance=ExtResource( 2 )]
 position = Vector2( 31, 135 )

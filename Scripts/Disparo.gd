@@ -1,12 +1,13 @@
 extends Area2D
 
-export var pixelesPorSegundo : int = 180
+export var PixelesPorSegundo : int = -50
 
 func _ready():
 	pass
 
 func _process(delta):
-	position.x -= pixelesPorSegundo * delta
-	
-	if position.x > 0:
-			queue_free()
+	position.x += PixelesPorSegundo * delta
+		
+	if position.y > 600:
+		queue_free()
+
