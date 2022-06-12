@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Escenarios/Nave/1.png" type="Texture" id=1]
 [ext_resource path="res://Escenas/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Audio/Background/Jedi Temple March.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Escenarios/Nave/0.png" type="Texture" id=4]
 [ext_resource path="res://Escenas/Camera.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Escenas/Disparo.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Escenas/Enemy.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -44,7 +45,10 @@ position = Vector2( -14, 91 )
 shape = SubResource( 2 )
 
 [node name="Enemy-01" parent="." instance=ExtResource( 8 )]
-position = Vector2( 309, 135 )
+position = Vector2( 338, 140 )
+
+[node name="Disparo" parent="Enemy-01" instance=ExtResource( 6 )]
+position = Vector2( -24, -6 )
 
 [node name="Obi" parent="." instance=ExtResource( 2 )]
 position = Vector2( 31, 135 )
