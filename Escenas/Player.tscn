@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=2]
+[gd_scene load_steps=151 format=2]
 
 [ext_resource path="res://Obi Wan/Salto/14.png" type="Texture" id=1]
 [ext_resource path="res://Obi Wan/Caminar/2.png" type="Texture" id=2]
@@ -93,6 +93,9 @@
 [ext_resource path="res://Audio/1.mp3" type="AudioStream" id=91]
 [ext_resource path="res://Audio/2.mp3" type="AudioStream" id=92]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=93]
+[ext_resource path="res://Obi Wan/Bloqueo/2.png" type="Texture" id=94]
+[ext_resource path="res://Obi Wan/Bloqueo/1.png" type="Texture" id=95]
+[ext_resource path="res://Obi Wan/Bloqueo/0.png" type="Texture" id=96]
 
 [sub_resource type="Animation" id=6]
 resource_name = "Ataque1"
@@ -141,6 +144,23 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 44 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 46 ), ExtResource( 45 ) ]
+}
+
+[sub_resource type="Animation" id=42]
+resource_name = "Bloqueo"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 96 ), ExtResource( 95 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ), ExtResource( 94 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -266,6 +286,9 @@ animation = "Ataque2"
 [sub_resource type="AnimationNodeAnimation" id=17]
 animation = "Ataque3"
 
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "Bloqueo"
+
 [sub_resource type="AnimationNodeAnimation" id=18]
 animation = "Caminar"
 
@@ -322,6 +345,34 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=40]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+
 [sub_resource type="AnimationNodeStateMachine" id=13]
 states/Ataque1/node = SubResource( 15 )
 states/Ataque1/position = Vector2( 284, 76 )
@@ -329,6 +380,8 @@ states/Ataque2/node = SubResource( 16 )
 states/Ataque2/position = Vector2( 546, 76 )
 states/Ataque3/node = SubResource( 17 )
 states/Ataque3/position = Vector2( 789, 76 )
+states/Bloqueo/node = SubResource( 43 )
+states/Bloqueo/position = Vector2( 1120, 651 )
 states/Caminar/node = SubResource( 18 )
 states/Caminar/position = Vector2( 825, 263 )
 states/Combo1/node = SubResource( 19 )
@@ -341,8 +394,8 @@ states/Estatico/node = SubResource( 22 )
 states/Estatico/position = Vector2( 546, 263 )
 states/Salto/node = SubResource( 23 )
 states/Salto/position = Vector2( 284, 263 )
-transitions = [ "Estatico", "Salto", SubResource( 24 ), "Estatico", "Caminar", SubResource( 25 ), "Caminar", "Estatico", SubResource( 26 ), "Combo1", "Combo2", SubResource( 28 ), "Combo2", "Combo3", SubResource( 29 ), "Estatico", "Combo1", SubResource( 30 ), "Combo1", "Estatico", SubResource( 31 ), "Combo2", "Estatico", SubResource( 32 ), "Combo3", "Estatico", SubResource( 33 ), "Ataque1", "Ataque2", SubResource( 34 ), "Ataque2", "Ataque3", SubResource( 35 ), "Estatico", "Ataque1", SubResource( 36 ), "Ataque1", "Estatico", SubResource( 37 ), "Ataque2", "Estatico", SubResource( 38 ), "Ataque3", "Estatico", SubResource( 39 ), "Salto", "Estatico", SubResource( 40 ) ]
-graph_offset = Vector2( 0, 140.351 )
+transitions = [ "Estatico", "Salto", SubResource( 24 ), "Estatico", "Caminar", SubResource( 25 ), "Caminar", "Estatico", SubResource( 26 ), "Combo1", "Combo2", SubResource( 28 ), "Combo2", "Combo3", SubResource( 29 ), "Estatico", "Combo1", SubResource( 30 ), "Combo1", "Estatico", SubResource( 31 ), "Combo2", "Estatico", SubResource( 32 ), "Combo3", "Estatico", SubResource( 33 ), "Ataque1", "Ataque2", SubResource( 34 ), "Ataque2", "Ataque3", SubResource( 35 ), "Estatico", "Ataque1", SubResource( 36 ), "Ataque1", "Estatico", SubResource( 37 ), "Ataque2", "Estatico", SubResource( 38 ), "Ataque3", "Estatico", SubResource( 39 ), "Salto", "Estatico", SubResource( 40 ), "Ataque3", "Bloqueo", SubResource( 46 ), "Bloqueo", "Ataque3", SubResource( 47 ), "Bloqueo", "Ataque2", SubResource( 48 ), "Ataque2", "Bloqueo", SubResource( 49 ), "Ataque1", "Bloqueo", SubResource( 50 ), "Bloqueo", "Ataque1", SubResource( 51 ), "Estatico", "Bloqueo", SubResource( 52 ), "Bloqueo", "Estatico", SubResource( 53 ), "Combo3", "Bloqueo", SubResource( 54 ), "Bloqueo", "Combo3", SubResource( 55 ), "Combo2", "Bloqueo", SubResource( 56 ), "Bloqueo", "Combo2", SubResource( 57 ), "Combo1", "Bloqueo", SubResource( 58 ), "Bloqueo", "Combo1", SubResource( 59 ) ]
+graph_offset = Vector2( 0, -125.389 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=14]
 
@@ -353,12 +406,14 @@ extents = Vector2( 16, 31.5 )
 script = ExtResource( 93 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -7.15256e-07 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Ataque1 = SubResource( 6 )
 anims/Ataque2 = SubResource( 7 )
 anims/Ataque3 = SubResource( 8 )
+anims/Bloqueo = SubResource( 42 )
 anims/Caminar = SubResource( 3 )
 anims/Combo1 = SubResource( 9 )
 anims/Combo2 = SubResource( 10 )

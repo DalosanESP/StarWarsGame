@@ -23,6 +23,7 @@ func _process(delta):
 	direction_ctrl()
 	salto_ctrl()
 	ataque_ctrl()
+	bloqueo_ctrl()
 	 
 func get_axis() -> Vector2:
 	var axisX = Vector2.ZERO
@@ -117,3 +118,6 @@ func ataque_ctrl():
 	if $RayEnemy.is_colliding() and col.is_in_group("Enemy"):
 		col.queue_free()
 
+func bloqueo_ctrl():
+	if Input.is_action_pressed("Bloqueo"):
+		playback.travel("Bloqueo")

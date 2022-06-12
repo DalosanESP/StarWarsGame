@@ -44,10 +44,10 @@ position = Vector2( -14, 91 )
 shape = SubResource( 2 )
 
 [node name="Enemy-01" parent="." instance=ExtResource( 8 )]
-position = Vector2( 339, 142 )
+position = Vector2( 309, 135 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 217, 137 )
+[node name="Obi" parent="." instance=ExtResource( 2 )]
+position = Vector2( 31, 135 )
 
 [node name="Camera" parent="." instance=ExtResource( 5 )]
 position = Vector2( 192, 108 )
