@@ -16,6 +16,4 @@ func _process(delta):
 	if(t >= tSiguiente):
 		t = 0
 		tSiguiente = tMin + randf() * (tMax - tMin)
-		var disparo = DISPARO.instance()
-		disparo.position = Vector2(338,240)
-		get_parent().add_child(disparo)
+		var disparo = DISPARO
